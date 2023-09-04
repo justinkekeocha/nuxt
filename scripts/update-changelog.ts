@@ -5,7 +5,9 @@ import { generateMarkDown, getCurrentGitBranch, loadChangelogConfig } from 'chan
 import { determineBumpType, getLatestCommits, loadWorkspace } from './_utils'
 
 async function main () {
-  const releaseBranch = await getCurrentGitBranch()
+  const releaseBranch = await getCurrentGitBranch().then(r => r.trim())
+  console.log({ releaseBranch })
+  process.exit()
   const workspace = await loadWorkspace(process.cwd())
   const config = await loadChangelogConfig(process.cwd(), {})
 
